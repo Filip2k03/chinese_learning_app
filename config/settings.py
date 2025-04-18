@@ -5,10 +5,52 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'your-secret-key'
+SECRET_KEY = 'django-insecure-jdn3du%sp4epl!rv^0hcl1bpn5-uuv@lwq23p-z!git9kzn0z&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Ensure this is present and early
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # ... other middleware
+]
+
+# settings.py
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    # Add other frontend origins if needed
+]
+
+# settings.py (optional)
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 ALLOWED_HOSTS = []
 
@@ -20,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',  # 👈 Add this line for coreheaders
     
     # Local apps
     'users',
@@ -30,6 +73,8 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
@@ -38,16 +83,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
 ROOT_URLCONF = 'config.urls'
 

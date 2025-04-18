@@ -16,13 +16,13 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'password2')
+        fields = ('username', 'email', 'password')
         extra_kwargs = {
             'username': {'required': True},
         }
 
     def validate(self, data):
-        if data['password'] != data['password2']:
+        if data['password']:
             raise serializers.ValidationError({"password": "Password fields didn't match."})
         return data
 
